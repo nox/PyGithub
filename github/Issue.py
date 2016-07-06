@@ -335,6 +335,18 @@ class Issue(github.GithubObject.CompletableGithubObject):
             None
         )
 
+    def get_timeline(self):
+        """
+        :calls: `GET /repos/:owner/:repo/issues/:issue_number/timeline <http://developer.github.com/v3/issues/timeline>`_
+        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.IssueEvent.IssueEvent`
+        """
+        return github.PaginatedList.PaginatedList(
+            github.IssueEvent.IssueEvent,
+            self._requester,
+            self.url + "/timeline",
+            None
+        )
+
     def get_labels(self):
         """
         :calls: `GET /repos/:owner/:repo/issues/:number/labels <http://developer.github.com/v3/issues/labels>`_
